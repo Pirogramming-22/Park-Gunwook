@@ -1,0 +1,152 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #2b3137;
+}
+
+#firstHeader {
+    display: flex;
+    justify-content: space-evenly;
+    width: 800px;
+    font-size: 20px;
+    color: white;
+}
+
+header div div:hover {
+    opacity: 0.6;
+}
+
+
+#secondHeader {
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+    height: 40px;
+    margin-top: 15px;
+}
+
+#search {
+    width: 250px;
+    border-radius: 7px;
+    background-color: grey;
+    opacity: 0.5;
+}
+
+#search::placeholder {
+    color: white;
+}
+
+#signIn {
+    border: none;
+    background-color: #2b3137;
+    color: white;
+}
+
+#signIn:hover {
+    opacity: 0.7;
+}
+
+#signUp {
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #2b3137;
+    color: white;
+}
+
+#signUp:hover {
+    opacity: 0.7;
+}
+
+#symbol {
+    width: 30px;
+    height: 30px;
+}
+
+section {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 800px;
+    background-color: #2b3137;
+}
+
+#mainSentence {
+    font-size: 50px;
+    color: white;
+}
+
+#subSentence {
+    font-size: 25px;
+    width: 600px;
+    color: white;
+    opacity: 0.6;
+}
+
+#white {
+    text-decoration: underline;
+}
+
+#foam {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    border-radius: 20px;
+    height: 700px;
+    margin-left: 200px;
+}
+
+div label {
+    font-size: 20px;
+    margin-left: 17px;
+}
+
+section div input {
+    font-size: 20px;
+    width: 500px;
+    height: 50px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    margin-left: 17px;   
+    border: 1px solid #ebedf1;
+}
+
+section div input:not(:placeholder-shown) {
+    background-color: #e8f0fe;
+}
+
+
+#foamSentence {
+    width: 500px;
+    text-align: justify;
+    margin-left:17px;
+    margin-right: 17px;
+}
+
+section div button {
+    display: block;
+    height: 100px;
+    width: 500px;
+    margin: 10px auto;
+    font-size: 30px;
+    background-color: #2ebc4f;
+    border-radius: 15px;
+    color: white;
+    border: none;
+}
+
+section div button:hover {
+    background-color: #249f41;
+}
+
+
+#blue {
+    color: skyblue;
+}
+
+footer {
+    display: flex;
+    justify-content: right;;
+}
