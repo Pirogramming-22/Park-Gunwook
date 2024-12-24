@@ -76,12 +76,17 @@
         * {
             box-sizing: border-box;
         }
-        html, body, form {
+        html, body{
             font-size: 10.5px;
             line-height: 10.5px;
             margin: 0;
             padding: 0;
+            letter-spacing: -0.4px;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕";
+        }
+        form, ul {
+            margin: 0;
+            padding: 0;
         }
         #wrap {
             text-align: center;
@@ -302,6 +307,9 @@
                 </form>
             </div>
             <style>
+                #nav {
+                    margin-top: 12px;
+                }
                 #nav > ul{
                     display: flex;
                     list-style-type: none;
@@ -312,6 +320,22 @@
                 }
                 #nav a {
                     text-decoration: none;
+                    text-align: center;
+                }
+                #nav a div {
+                    position: relative;
+                }
+                #nav a div::after {
+                    content: '';
+                    display: inline-block;
+                    background-image: url("./sp_main.png");
+                    background-size: 452px 436px;
+                    background-repeat: no-repeat;
+                    width: 40px;
+                    height: 40px;
+                    z-index: 1;
+                    position: relative;
+                    margin: 2px;
                 }
                 #nav a:visited {
                     color:black;
@@ -319,12 +343,58 @@
                 #nav li {
                     width: 64px;
                     margin-left: 4px;
+                    display: flex;
+                    justify-content: center;
                 }
                 #nav li:nth-of-type(1) {
                     margin-left: 0;
                 }
-                #nav li:nth-of-type(2) {
-
+                #nav li a div::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: -1px;
+                    left: -3px;
+                    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+                    background-size: 452px 436px;
+                    background-position: -153px -142px;
+                    background-repeat: no-repeat;
+                    width: 50px;
+                    height: 50px;
+                }
+                #nav li:nth-of-type(1) a div::after {
+                    background-position: -200px -215px;
+                }
+                #nav li:nth-of-type(2) a div::after {
+                    background-position: -39px -215px;
+                }
+                #nav li:nth-of-type(3) a div::after {
+                    background-position: 0px -214px;
+                }
+                #nav li:nth-of-type(4) a div::after {
+                    background-position: -41px -255px;
+                }
+                #nav li:nth-of-type(5) a div::after {
+                    background-position: -265px -200px;
+                }
+                #nav li:nth-of-type(6) a div::after {
+                    background-position: -120px -255px;
+                }
+                #nav li:nth-of-type(7) a div::after {
+                    background-position: 0px -255px;
+                }
+                #nav li:nth-of-type(8) a div::after {
+                    background-position: -263px 5px;
+                }
+                #nav li:nth-of-type(9) a div::after {
+                    background-position: -160px -255px;
+                }
+                #nav li:nth-of-type(10) a div::after {
+                    background-position: -265px -164px;
+                }
+                #nav li a span {
+                    display: inline-block;
+                    margin-top: 7px;
                 }
             </style>
             <div id="nav">
