@@ -87,7 +87,6 @@
         #wrap-center {
             width: 1280px;
             display: inline-block;
-            background-color: yellow;
         }
         #header {
             text-align: left;
@@ -176,6 +175,7 @@
                 </button>
             </div>
             <style>
+                /*
                 #search > form {
                     display: inline-block;
                     width: 708px;
@@ -200,16 +200,87 @@
                 #search > form img {
                     width: 24px;
                     height: 24px;
+                }*/
+                #search > form {
+                    display: inline-block;
+                    width: 708px;
+                    height: 60px;
+                    border: 1px solid #03c75a;
+                    border-radius: 33px;
+                    text-align: left;
+                }
+                #search-svg {
+                    display: inline-block;
+                    width: 68px;
+                    margin-right: 12px;
+                    height: 60px;
+                    padding-left: 10px;
+                }
+                #search-svg img {
+                    width: 24px;
+                    height: 24px;
+                }
+                #search-input {
+                    display: inline-block;
+                    width: 480px;
+                    padding: 17px 0;
+                    line-height: 24px;
+                    font-weight: bold;
+                    border: none;
+                    outline: none;
+                }
+                #search-right {
+                    display: inline-block;
+                }
+                #search-keyboard:before {
+                    content: "";
+                    display: block;
+                    background-image: url("./sp_main.png");
+                    background-size: 452px 436px;
+                    background-position: -148px -301px;
+                    background-repeat: no-repeat;
+                    width: 24px;
+                    height: 14px;
+                }
+                #search-recent:before {
+                    content: "";
+                    display: block;
+                    background-image: url("./sp_main.png");
+                    background-size: 452px 436px;
+                    background-position: -154px -211px;
+                    background-repeat: no-repeat;
+                    width: 10px;
+                    height: 6px;
+                }
+                #search-button:before {
+                    content: "";
+                    display: inline-block;
+                    background-image: url("./sp_main.png");
+                    background-size: 452px 436px;
+                    background-position: -395px -76px;
+                    background-repeat: no-repeat;
+                    width: 25px;
+                    height: 25px;
                 }
             </style>
             <div id="search">
                 <form action="">
-                    <a href="#">
+                    <a id="search-svg" href="#">
                         <img src="./favicon.ico" alt="naver icon">
                     </a>
                     <label for="search-input"></label>
-                    <input id="search-input" type="text">
-                    <button class="blind"></button>
+                    <input id="search-input" type="text" placeholder="검색어를 입력하세요.">
+                    <div id="search-right">
+                        <button href="#" id="search-keyboard">
+                            <span class="blind">입력도구</span>
+                        </button>
+                        <button href="#" id="search-recent">
+                            <span class="blind">자동완성/최근검색어펼치기</span>
+                        </button>
+                        <button id="search-button">
+                            <div><span class="blind">검색</span></div>
+                        </button>
+                    </div>
                 </form>
             </div>
             <div id="nav"></div>
