@@ -91,6 +91,10 @@ section > article {
     animation-fill-mode: forwards;
     z-index: 0;
 }
+.flex-item:hover > .image > img {
+    animation: Scale 1s;
+    animation-fill-mode: forwards;
+}
 .image {
     display: flex;
     justify-content: center;
@@ -100,10 +104,6 @@ section > article {
     border-radius: 15px;
     background-color: white;
     overflow: hidden;
-}
-.image > img:hover {
-    animation: Scale 1s;
-    animation-fill-mode: forwards;
 }
 .project-image {
     width: auto;
