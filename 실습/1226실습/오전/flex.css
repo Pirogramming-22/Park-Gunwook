@@ -1,0 +1,29 @@
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    flex-wrap: wrap; /*하위요소가 부모요소를 넘칠 위기일 경우 줄바꿈 */
+    background-color: skyblue;
+    padding: 20px;
+}
+
+.flex-item {
+    flex: 1 1 calc(33.33% - 60px); /* flex-glow flex-shrink flex-basis */
+    background-color: antiquewhite;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .flex-item {
+        flex: 1 1 calc(50% - 60px);
+    }
+}
+
+@media (max-width: 480px) {
+    .flex-item {
+        flex: 1 1 clac(100%);
+    }
+}

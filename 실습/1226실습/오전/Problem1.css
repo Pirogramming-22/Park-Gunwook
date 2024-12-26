@@ -1,0 +1,30 @@
+.responsive-container {
+    display:grid;
+    gap: 10px;
+    background-color: skyblue;
+    justify-content: center;
+    margin: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 10px;
+}
+
+.responsive-item {
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+@media(max-width: 768px) {
+    .responsive-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+}
+
+@media(max-width: 480px) {
+    .responsive-container {
+        grid-template-columns: 1fr;
+        grid-template-rows:  1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+}
