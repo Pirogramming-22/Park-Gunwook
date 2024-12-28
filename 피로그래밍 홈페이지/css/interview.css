@@ -177,6 +177,7 @@ section > header div:last-child {
 
 .degree {
     color: white;
+    width: 120px;
     font-size: 14px;
 }
 
