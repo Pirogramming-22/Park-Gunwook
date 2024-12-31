@@ -146,6 +146,14 @@ document.querySelector('.submit-button').addEventListener('click', () => {
         updateAttempts(attemptSpan);
     }
 
+    document.getElementById('number1').value = '';
+    document.getElementById('number2').value = '';
+    document.getElementById('number3').value = '';
+
+    value1 = "";
+    value2 = "";
+    value3 = "";
+
     /*
     <div class="remaining-attempts">
             남은 횟수: <span id="attempts">${attempts}</span>
