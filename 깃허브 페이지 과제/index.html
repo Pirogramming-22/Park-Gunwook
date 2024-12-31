@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github - Build and ship software</title>
+    <link href="githubSymbol.png" rel="Icon" type="image/icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div id="firstHeader">
+            <img src="githubSymbol.png" alt="github symbol" id="symbol">
+            <div>Why GitHub?</div>
+            <div>Team</div>
+            <div>Enterprise</div>
+            <div>Explore</div>
+            <div>Marketplace</div>
+            <div>Pricing</div>
+        </div>
+        <div id="secondHeader">
+            <input id="search" type="text" placeholder="Search GitHub">
+            <button id="signIn" type="button" onclick="location.href='https://github.com/login'">Sign in</button>
+            <button id="signUp" type="button" onClick="location.href='https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home'">Sign up</button>
+        </div>
+    </header>
+    <section>
+        <div id="sentences">
+            <div id="mainSentence">
+                <h1>Built for <br> developers</h1>
+            </div>
+            <div id="subSentence">
+                <p>GitHub is a development platform inspired by the way you work. From <strong id="white">open source</strong> to <strong id="white">business</strong>, you can host and review code, manage projects, and build software alongside 50 million developers</p>
+            </div>
+        </div>
+        <div id="foam">
+            <label for="userName">Username</label>
+            <input type="text" placeholder="" id="userName">
+            <label for="email">Email</label>
+            <input type="email" placeholder="" id="email">
+            <label for="passWord">Password</label>
+            <input type="password" placeholder="" id="passWord">
+            <p id="foamSentence">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter. <span id="blue">Learn more.</span></p>
+            <button type="button" onClick="location.href='https://github.com/signup?source=form-home-signup&user_email='">Sign up for GitHub</button>
+            <p id="foamSentence">By clicking "Sign up for GitHub", you agree to our <span id="blue">Terms of Service</span> and <span id="blue">Privacy Statement.</span> We'll occasionally send you account related emails.</p>
+        </div>
+    </section>
+    <footer>
+        <img id="footerImage" src="footer.png" alt="footerPNG">
+    </footer>
+</body>
+</html>
