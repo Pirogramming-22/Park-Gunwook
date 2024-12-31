@@ -91,11 +91,19 @@ function updateAttempts(newAttempts) {
 updateAttempts(attemptSpan);
 
 
-document.querySelector('.submit-button').addEventListener('click', () => {
+document.querySelector('.submit-button').addEventListener('click', (event) => {
     const number1 = check_numbers(1);
     const number2 = check_numbers(2);
     const number3 = check_numbers(3);
+    if (number1 === '' || number2 === '' || number3 === '') {
+        event.preventDefault();
 
+        document.getElementById('number1').value = '';
+        document.getElementById('number2').value = '';
+        document.getElementById('number3').value = '';
+        
+        return;
+    }
     // 스트라이크 및 볼 계산
     if(Number(number1) === ScoreSet[0]) {
         Strike++;
