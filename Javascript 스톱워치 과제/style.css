@@ -1,0 +1,163 @@
+body {
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+}
+
+.upper {
+    width: 400px;
+    height: 300px;
+    background-color: #b5bfb6;
+    gap: 50px;
+    border-radius: 20%;
+}
+.stopwatch-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    background: white;
+}
+
+.display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: px;
+    border-radius: 30px;
+    height: 110px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: white;
+    margin: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.buttons button {
+    width: 70px;
+    height: 70px;
+    border-radius: 40%;
+    border: none;
+}
+
+.lap-container {
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 500px;
+    border-radius: 30px;
+}
+
+.container {
+    display: flex;
+    height: 70px;
+    background-color: rgb(181, 191, 182);
+    justify-content: space-between;
+    align-items: center;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+#select-all-laps {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+#select-all-laps::before {
+    content: ''; 
+    top: 50%;
+    left: 10px; /* 아이콘이 왼쪽에 배치되도록 조정 */
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url('./check-lg.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* 버튼 클릭 시 아이콘을 교체하려면 */
+#select-all-laps:active::before {
+    background-image: url('./check-lg-checked.svg'); /* 선택된 상태의 아이콘 */
+}
+
+.lap-header {
+    font-weight: bold;
+}
+
+.laps {
+    list-style: none;
+    padding: 0;
+}
+
+.laps li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.laps li span {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.laps li:last-child {
+    border-bottom: none;
+}
+
+.clear-laps {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.bi-trash3-fill {
+    width: 30px;
+    height: 30px;
+}
+
+.clear-laps:hover {
+    text-decoration: underline;
+}
+
+input[type="checkbox"] {
+    appearance: none; /* 기본 체크박스 스타일 제거 */
+    width: 30px; /* 체크박스 크기 */
+    height: 30px; /* 체크박스 크기 */
+    border-radius: 50%; /* 원 모양 만들기 */
+    border: 1px solid #000; /* 외곽선 */
+    position: relative; /* 체크 아이콘을 위치시킬 수 있도록 */
+    cursor: pointer; /* 클릭할 수 있도록 */
+    background-color: white; /* 체크되지 않은 상태에서 배경은 흰색 */
+    margin-right: 10px; /* 체크박스와 텍스트 사이의 간격 */
+}
+
+input[type="checkbox"]:checked::after {
+    content: ''; /* 기본 content를 없앰 */
+    position: absolute;
+    top: 50%; /* 세로 중앙 정렬 */
+    left: 50%; /* 가로 중앙 정렬 */
+    transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+    width: 12px; /* 체크 아이콘 크기 */
+    height: 12px; /* 체크 아이콘 크기 */
+    background-image: url('./check-lg.svg');
+    background-size: contain; /* SVG 아이콘을 크기에 맞게 */
+    background-repeat: no-repeat; /* 반복되지 않도록 */
+}
