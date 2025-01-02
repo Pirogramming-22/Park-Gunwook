@@ -22,6 +22,9 @@ while True:
         print(f"{'playerA' if playerATurn else 'playerB'} : {num}")
         if num >= 31:
             break
+
+    if num >= 31:
+        break
     
     playerATurn = not playerATurn
     
