@@ -1,3 +1,5 @@
+from random import randint
+
 num = 0
 playerATurn = True
 
@@ -16,16 +18,19 @@ def brGame():
         
 
 while True:
-    playerNum = brGame()
+    if not playerATurn:
+        playerNum = brGame()
+    else:
+        playerNum = randint(1, 3)
     
     for _ in range(playerNum):
         num += 1
-        print(f"{'playerA' if playerATurn else 'playerB'} : {num}")
+        print(f"{'computer' if playerATurn else 'player'} : {num}")
         if num >= 31:
             break
         
     if num >= 31:
-        print(f"{'playerB' if playerATurn else 'playerA'} 승리!")
+        print(f"{'player' if playerATurn else 'computer'} 승리!")
         break
     
     playerATurn = not playerATurn
