@@ -1,0 +1,12 @@
+<h1>My Movie Reviews</h1>
+<ul>
+    {% for review in reviews %}
+        <li>
+            <a href="{% url 'review_detail' pk=review.pk %}">{{ review.title }}</a>
+            <div>개봉년도 {{ review.release_year }}</div>
+            <div>장르 {{ review.genre }}</div>
+            <div>별점 {{ review.rating }}</div>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'review_create' %}">새 리뷰 작성</a>
