@@ -1,0 +1,6 @@
+<h1>{% if form.instance.pk %}리뷰 수정{% else %}새 리뷰 작성{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">저장</button>
+</form>

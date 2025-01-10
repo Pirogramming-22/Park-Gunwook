@@ -1,0 +1,13 @@
+<h1>{{ review.title }} ({{ review.release_year }})</h1>
+<p>감독: {{ review.director }}</p>
+<p>주연: {{ review.cast }}</p>
+<p>장르: {{ review.genre }}</p>
+<p>별점: {{ review.rating }} ★</p>
+<p>러닝타임: {{ review.runtime }} 분</p>
+<p>{{ review.review_content }}</p>
+<a href="{% url 'review_list' %}">my Movie reviews</a>
+<a href="{% url 'review_edit' pk=review.pk %}">수정</a>
+<form method="post" action="{% url 'review_delete' pk=review.pk %}">
+    {% csrf_token %}
+    <button type="submit">삭제</button>
+</form>
