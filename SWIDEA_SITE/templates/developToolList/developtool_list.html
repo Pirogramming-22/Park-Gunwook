@@ -1,0 +1,15 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <div class="DT-list-container">
+        <h1 class="DT-list-title">DevTool List</h1>
+        <div class="DT-list-sub">개발툴 목록 페이지입니다. 자신이 사용가능한 개발툴의 목록을 확인해보세요.</div>
+    {% for tool in tools %}
+        <div class="DT-list-container-item">
+            <a class="DT-list-link" href="{% url 'developtool_detail' tool.id %}">{{ tool.name }}</a>
+            <div class="DT-list-white">{{ tool.languageType }}</div>
+            <div>{{ tool.content }}</div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

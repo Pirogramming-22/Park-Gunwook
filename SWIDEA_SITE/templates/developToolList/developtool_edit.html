@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <div class="DT-create-container">
+        <h1 class="DT-create-title">DevTool Detail Update</h1>
+        <div class="DT-create-sub">개발툴 세부내용 수정 페이지입니다. 개별툴에 대해 수정사항이 있으면 고쳐보세요.</div>
+        <form method="post" class="DT-create-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">등록</button>
+        </form>
+    </div>
+{% endblock %}
