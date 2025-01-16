@@ -1,0 +1,132 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1 class="title">Idea List</h1>
+    <div class="sub-title">나의 아이디어를 잊지 말고 기록해보세요</div>
+
+    <!-- 정렬 기준 선택 드롭다운 -->
+    <form method="get" action="" class="sort-form">
+        <label for="sort_by">정렬 기준:</label>
+        <select name="sort_by" onchange="this.form.submit()">
+            <option value="like" {% if sort_by == "like" %}selected{% endif %}>좋아요순</option>
+            <option value="name" {% if sort_by == "name" %}selected{% endif %}>이름순</option>
+            <option value="created_at" {% if sort_by == "created_at" %}selected{% endif %}>최신순</option>
+            <option value="liked" {% if sort_by == "liked" %}selected{% endif %}>찜한 아이디어순</option>
+        </select>
+    </form>
+
+    <div class="container">
+        {% for idea in page_obj %}
+            <div class="container-item">
+                <img class="list-image" src="{{ idea.image.url }}" alt="{{ idea.name }}" width="100px">
+                <a class="idea-name" href="{% url 'idea_detail' idea.id %}">{{ idea.name }}</a>
+                <div class="list-text">예상 개발 툴 : {{ idea.developTool.name }}</div>
+                <div class="like-container">
+                    <div>아이디어 관심도: </div>
+                    <span class="like-action decrease-like" data-idea-id="{{ idea.id }}">-</span>
+                    <span class="like-count list-text" data-idea-id="{{ idea.id }}"> {{ idea.like }}</span>
+                    <span class="like-action increase-like" data-idea-id="{{ idea.id }}">+</span>
+                </div>
+
+                <div class="like-icon {% if idea.id in liked_ideas %}liked{% else %}unliked{% endif %}" data-idea-id="{{ idea.id }}" data-status="{% if idea.id in liked_ideas %}liked{% else %}unliked{% endif %}">
+                    {% if idea.id in liked_ideas %}
+                        ★  <!-- 찜한 상태 -->
+                    {% else %}
+                        ☆  <!-- 찜하지 않은 상태 -->
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            <span class="current">
+                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_previous %}
+                <a href="?page=1&sort_by={{ sort_by }}">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}&sort_by={{ sort_by }}">Previous</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&sort_by={{ sort_by }}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&sort_by={{ sort_by }}">Last</a>
+            {% endif %}
+        </span>
+    </div>
+    <script>
+        // + 클릭 시 관심도 증가
+        document.querySelectorAll('.increase-like').forEach(function(div) {
+            div.addEventListener('click', function() {
+                var ideaId = this.getAttribute('data-idea-id');
+                updateLikeCount(ideaId, 'increase');
+            });
+        });
+    
+        // - 클릭 시 관심도 감소
+        document.querySelectorAll('.decrease-like').forEach(function(div) {
+            div.addEventListener('click', function() {
+                var ideaId = this.getAttribute('data-idea-id');
+                updateLikeCount(ideaId, 'decrease');
+            });
+        });
+    
+        // 관심도 업데이트 함수
+        function updateLikeCount(ideaId, action) {
+            var likeCountElement = document.querySelector(`.like-count[data-idea-id="${ideaId}"]`);
+            var currentLikeCount = parseInt(likeCountElement.textContent.replace('아이디어 관심도 : ', '').trim());
+    
+            // AJAX 요청 보내기
+            fetch(`/update_like/${ideaId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    action: action
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 서버에서 받은 새로운 관심도 값으로 UI 업데이트
+                if (data.status === 'success') {
+                    likeCountElement.textContent = `${data.new_like_count}`;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        document.querySelectorAll('.like-icon').forEach(function(div) {
+            div.addEventListener('click', function() {
+                var ideaId = this.getAttribute('data-idea-id');
+                var currentStatus = this.getAttribute('data-status');
+
+                // 찜 상태를 서버에 보내기
+                fetch(`/toggle_like/${ideaId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // UI 업데이트
+                    if (data.status === 'added') {
+                        this.innerHTML = '★';  // 찜한 상태로 변경
+                        this.setAttribute('data-status', 'liked');
+                        this.classList.remove('unliked');
+                        this.classList.add('liked');
+                    } else if (data.status === 'removed') {
+                        this.innerHTML = '☆';  // 찜 해제 상태로 변경
+                        this.setAttribute('data-status', 'unliked');
+                        this.classList.remove('liked');
+                        this.classList.add('unliked');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>    
+{% endblock %}

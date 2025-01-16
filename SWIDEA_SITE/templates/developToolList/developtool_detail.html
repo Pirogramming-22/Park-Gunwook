@@ -1,0 +1,24 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <div class="DT-detail-main-container">
+        <h1 class="DT-detail-title">DevTool Detail</h1>
+        <div class="DT-detail-sub">개발툴 세부내용 페이지입니다. 자신이 다룰 수 있는 개발툴에 대한 상세네용을 확인해 보아요.</div>
+        <div class="DT-detail-container">
+            <h1>{{ tool.name }}</h1>
+            <p>{{ tool.content }}</p>
+            <h3>> 만들 수 있는 SW 목록</h3>
+            <ul>
+                {% for idea in ideas %}
+                    <li class="DT-detail-li"><a class="detail-selector-item" href="{% url 'idea_detail' idea.id %}">{{ idea.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="DT-detail-selector">
+            <a class="detail-selector-item" href="{% url 'developtool_edit' tool.id %}">수정</a> | 
+            <a class="detail-selector-item" href="{% url 'developtool_list' %}">목록</a> | 
+            <a class="detail-selector-item" href="{% url 'developtool_delete' tool.id %}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+        </div>
+    </div>
+{% endblock %}

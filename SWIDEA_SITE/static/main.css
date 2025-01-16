@@ -1,0 +1,240 @@
+body {
+    background-color: gray;
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navBar-item a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.title {
+    text-align: center;
+    color: greenyellow;
+    margin-bottom: 0;
+}
+
+.sub-title {
+    text-align: center;
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    background-color: lightgray;
+    width: 700px;
+    align-items: center;
+    margin: 10px auto;
+    border-radius: 20px;
+    
+}
+
+.container-item {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 30px;
+    background-color: lightblue;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.list-text {
+    text-align: left;
+}
+
+.list-image {
+    margin: 1px auto;
+}
+
+.idea-name {
+    text-decoration: none;
+    color: black;
+}
+
+.sort-form {
+    text-align: center;
+    color: white;
+}
+
+.step-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-title {
+    text-align: center;
+    color: greenyellow;
+    margin-bottom: 0;
+}
+
+.create-sub {
+    text-align: center;
+    color: white;
+}
+
+.create-container {
+    display: flex;
+    justify-content: center;  /* 수평 가운데 정렬 */
+    align-items: center;      /* 수직 가운데 정렬 */
+    height: 100%;             /* 부모 div의 높이를 100%로 설정 */
+}
+
+.create-form {
+    margin-top: 30px;            /* form 너비를 100%로 설정 */
+    max-width: 500px;         /* 최대 너비 제한 */
+    padding: 20px;            /* 내부 여백 */
+    background-color: lightgray; /* form에 배경색을 설정 */
+    border-radius: 10px;      /* 모서리 둥글게 */
+}
+
+.detail-main-container {
+    background-color: lightgray;
+    margin: 50px;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 30px;
+    border: 1px solid white;
+    padding: 20px;
+}
+
+.right-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-title {
+    text-align: center;
+    color: greenyellow;
+}
+
+.detail-sub {
+    text-align: center;
+}
+
+.detail-selector {
+    text-align: center;
+}
+
+.detail-selector-item {
+    text-decoration: none;
+    color: black;
+}
+
+.DT-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 3px auto;
+    margin-top: 30px;
+    background-color: lightblue;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.DT-list-link {
+    text-decoration: none;
+    color: black;
+}
+
+.DT-list-white {
+    color: white;
+}
+
+.DT-list-container-item {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    gap: 30px;
+}
+
+.DT-list-title {
+    text-align: center;
+    color: greenyellow;
+} 
+
+.DT-list-sub {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.DT-create-container {
+    display: flex;
+    justify-content: center;  /* 수평 가운데 정렬 */
+    align-items: center;      /* 수직 가운데 정렬 */
+    height: 100%;             /* 부모 div의 높이를 100%로 설정 */
+    flex-direction: column;
+}
+
+.DT-create-form {
+    margin-top: 30px;            /* form 너비를 100%로 설정 */
+    max-width: 500px;         /* 최대 너비 제한 */
+    padding: 20px;            /* 내부 여백 */
+    background-color: lightgray; /* form에 배경색을 설정 */
+    border-radius: 10px;      /* 모서리 둥글게 */
+}
+
+.DT-create-title {
+    color: greenyellow;
+}
+
+.DT-create-sub {
+    color: white;
+}
+
+.DT-detail-main-container {
+    width: 80%;
+    background-color: lightgray;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.DT-detail-title {
+    text-align: center;
+    color: greenyellow;
+}
+
+.DT-detail-sub {
+    text-align: center;
+    color: white;
+}
+
+.DT-detail-container {
+    border: 1px solid white;
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.DT-detail-selector {
+    text-align: center;
+}
+
+.DT-detail-li {
+    list-style-type: none;
+}
+
+.like-icon {
+    position: absolute;
+    right: 10px;
+}

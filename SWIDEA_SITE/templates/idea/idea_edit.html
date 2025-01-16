@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1 class="create-title">Idea Detail Update</h1>
+    <div class="create-sub">아이디어 세부내용 수정 페이지입니다. 아이디어를 구체화하거나 내용을 변경해보아요.</div>
+    <div class="create-container">
+        <form method="post" enctype="multipart/form-data", class="create-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">수정</button>
+        </form>
+    </div>
+{% endblock %}
