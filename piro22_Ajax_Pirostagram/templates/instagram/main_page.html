@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'reset.css' %}">
+    <link rel="stylesheet" href="{% static 'layout.css' %}">
+    <link rel="stylesheet" href="{% static 'header.css' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="{% static 'userInfo.css' %}">
+    <link rel="stylesheet" href="{% static 'highlights.css' %}">
+    <link rel="stylesheet" href="{% static 'posts.css' %}">
+    <title>Profile Page</title>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <button class="header__goBackButton">
+            <img src="{% static 'assets/icons/goBack.svg' %}" alt="뒤로 가기 버튼">
+        </button>
+        <div class="header__username">Pirogramming</div>
+        <div class="header__rightButtons">
+            <button class="header__alarmButton">
+                <img src="{% static 'assets/icons/alarm.svg' %}" alt="알림 열기 버튼">
+            </button>
+            <button class="header__moreButton">
+                <img src="{% static 'assets/icons/more.svg' %}" alt="더보기 열기 버튼">
+            </button>
+        </div>
+    </header>
+    <main>
+        <section class="profile">
+            <div class="profile__image">
+                <img src="{% static 'assets/images/profilePicture.png' %}" alt="프로필 사진">
+            </div>
+            <div class="profile__data">
+                <div class="profile__data-item">
+                    <div class="profile__data-number">1,234</div>
+                    <div class="profile__data-type">Posts</div>
+                </div>
+                <div class="profile__data-item">
+                    <div class="profile__data-number">5,678</div>
+                    <div class="profile__data-type">Followers</div>
+                </div>
+                <div class="profile__data-item">
+                    <div class="profile__data-number">9,101</div>
+                    <div class="profile__data-type">Following</div>
+                </div>
+            </div>
+        </section>
+        <section class="userInfo">
+            <div>
+                <div class="userInfo__username">Pirogramming</div>
+                <div class="userInfo__category">컴퓨터 회사</div>
+                <div class="userInfo__description">
+                    프로그래밍의 첫 걸음, 피로그래밍
+                </div>
+            </div>
+            <button class="userInfo__follow">Follow</button>
+        </section>
+        <aside class="highlights">
+            <div class="highlights__item">
+                <button class="highlights__item-image">
+                    <img src="{% static 'assets/images/profilePicture.png' %}" alt="하이라이트 보기">
+                </button>
+                <div class="highlights_item-title">Title</div>
+            </div>
+        </aside>
+        <section class="posts">
+            <nav class="posts__tabBar">
+                <div class="posts__tab posts__tab--selected">1</div>
+                <div class="posts__tab">2</div>
+                <div class="posts__tab">3</div>
+            </nav>
+            <article class="posts__contents">
+                {% for post in posts %}
+                <div class="posts__photo">
+                    <img src="{{ post.image.url }}" alt="포스트 이미지">
+            
+                    <!-- 좋아요 버튼 추가 -->
+                    <form method="POST" action="{% url 'instagram:toggle_like' post.id %}" data-post-id="{{ post.id }}">
+                        {% csrf_token %}
+                        <button type="submit" class="posts__likeButton">
+                            {% if likes_count == 1 %}
+                                💔 <span class="like_color">Unlike</span>
+                            {% else %}
+                                ❤️ <span class="like_color">Like</span>
+                            {% endif %}
+                        </button>
+                    </form>
+            
+                    <!-- 댓글 입력 폼 추가 -->
+                    <div class="posts__comments">
+                        <!-- 댓글 목록 -->
+                        <ul>
+                            {% for comment in post.comments.all %}
+                            <li id="comment-{{ comment.id }}">
+                                {{ comment.content }}
+                                <button class="posts__deleteCommentButton" data-comment-id="{{ comment.id }}">삭제</button>
+                            </li>
+                            {% endfor %}
+                        </ul>
+            
+                        <!-- 댓글 입력 폼 -->
+                        <form class="posts__commentForm" method="POST" data-post-id="{{ post.id }}">
+                            {% csrf_token %}
+                            <textarea name="comment" placeholder="댓글을 입력하세요..."></textarea>
+                            <button type="submit" class="posts__commentButton">댓글 달기</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No posts available.</p>
+                {% endfor %}
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+<script>
+    // 좋아요 버튼 클릭 시 AJAX 요청 처리
+    document.addEventListener('DOMContentLoaded', function () {
+        const likeButtons = document.querySelectorAll('.posts__likeButton');
+    
+        likeButtons.forEach(button => {
+            const form = button.closest('form');
+            const postId = form.dataset.postId;
+    
+            if (!postId) {
+                console.error("Post ID is missing!");
+                return;
+            }
+            console.log(postId);
+            // 페이지 로드 시 서버에서 현재 좋아요 상태 확인
+            fetch(`/post/${postId}/like/`)
+                .then(response => response.json())
+                .then(data => {
+                    // 서버에서 받은 상태에 맞게 초기화
+                    if (data.likes_count === 1) {
+                        button.innerHTML = '💔 <span class="like_color">Unlike</span>';
+                        console.log(data.likes_count);
+                    } else {
+                        button.innerHTML = '❤️ <span class="like_color">Like</span>';
+                        console.log(data.likes_count);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+    
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // 기본 폼 제출을 막음
+    
+                // AJAX 요청 보내기
+                fetch(`/post/${postId}/like/`, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value // CSRF 토큰 헤더에 추가
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.likes_count)
+                    // 좋아요 상태에 맞게 버튼 텍스트 변경
+                    if (data.likes_count === 1) {
+                        button.innerHTML = '💔 <span class="like_color">Unlike</span>';
+                        console.log("TRUE");
+                    } else {
+                        button.innerHTML = '❤️ <span class="like_color">Like</span>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const commentForms = document.querySelectorAll('.posts__commentForm');
+
+        commentForms.forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // 기본 폼 제출 방지
+
+                const postId = form.dataset.postId; // data-post-id 속성에서 포스트 ID 가져오기
+                const content = form.querySelector('textarea[name="comment"]').value; // 댓글 내용 가져오기
+                const csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value; // CSRF 토큰 가져오기
+
+                // XMLHttpRequest 객체 생성
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/instagram/post/' + postId + '/add-comment/', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.setRequestHeader('X-CSRFToken', csrfToken);  // CSRF 토큰 설정
+
+                // AJAX 요청을 보냄
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        
+                        // 새로운 댓글 HTML을 생성하여 댓글 목록에 추가
+                        const commentHtml = `
+                            <li id="comment-${response.id}">
+                                ${response.content}
+                                <button class="posts__deleteCommentButton" data-comment-id="${response.id}">삭제</button>
+                            </li>
+                        `;
+                        form.closest('.posts__comments').querySelector('ul').insertAdjacentHTML('beforeend', commentHtml);
+
+                        // 댓글 입력 필드 초기화
+                        form.querySelector('textarea').value = '';
+
+                        // 삭제 버튼 클릭 이벤트 리스너 추가
+                        addDeleteButtonEventListeners();
+                    } else {
+                        alert('댓글 추가에 실패했습니다.');
+                    }
+                };
+
+                // AJAX로 보내는 데이터
+                const data = `content=${encodeURIComponent(content)}`;
+
+                // 요청 보내기
+                xhr.send(data);
+            });
+        });
+
+        // 삭제 버튼 이벤트 리스너 추가
+        function addDeleteButtonEventListeners() {
+            const deleteButtons = document.querySelectorAll('.posts__deleteCommentButton');
+        
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // 기본 동작 방지
+
+                    const commentId = button.getAttribute('data-comment-id');
+                    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                    // AJAX 요청
+                    fetch(`/instagram/comment/${commentId}/delete/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': csrfToken
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // 댓글 삭제 후 DOM에서 댓글 항목 삭제
+                            document.querySelector(`#comment-${commentId}`).remove();
+                        } else {
+                            alert('댓글 삭제에 실패했습니다.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+        }
+
+        // 페이지 로드 시 이미 존재하는 댓글들에 대해서도 삭제 버튼 이벤트 리스너를 추가
+        addDeleteButtonEventListeners();
+    });
+</script>
+</html>
